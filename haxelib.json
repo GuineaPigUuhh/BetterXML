@@ -1,0 +1,11 @@
+{
+    "name": "XmlHelper",
+    "url" : "https://github.com/GuineaPigUuhh/BetterXML",
+    "license": "MIT",
+    "tags": [],
+    "description": "a lib that makes haxe's XML better.",
+    "version": "1.0.0",
+    "releasenote": "Initial release, everything is working correctly.",
+    "contributors": ["GuineaPigUuhh"],
+    "dependencies": {}
+  }
