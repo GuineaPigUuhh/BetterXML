@@ -2,16 +2,26 @@ package xmlhelper;
 
 using StringTools;
 
+enum XmlCanTypes {
+    STR;
+    INT;
+    FLOAT;
+    BOOL;
+    DYNAMIC;
+}
+
 class XmlUtil {
     public static function getBool(xml:Xml, att:String, ?def:Bool = false):Bool {
         if (xml.exists(att))
-        {
-            var betteratt = xml.get(att).toLowerCase();
-            if (betteratt == "true" || betteratt == "1")
-                return true;
-            else if (betteratt == "false" || betteratt == "0")
-                return false;
-        }    
+            return Simplify.parseBool(xml.get(att).toLowerCase());
+        return def;
+    }
+
+    public static function getNumber(xml:Xml, att:String, ?def:Float = 0) {
+        if (xml.get(att).contains('.'))
+            return getFloat(xml, att);
+        else
+            return getInt(xml, att);
         return def;
     }
 
@@ -33,18 +43,29 @@ class XmlUtil {
         if ((boolAtt == "false" || boolAtt == "0") || (boolAtt == "true" || boolAtt == "1"))
             return getBool(xml, att);
         else if (Simplify.containsArray(att, numberArray))
-        {
-            if (xml.get(att).contains('.'))
-                return getFloat(xml, att);
-            else
-                return getInt(xml, att);
-        }    
-
+            return getNumber(xml, att);
+        
         return xml.get(att);
     }
 
-    public static function getArray(xml:Xml, att:String) {
-        return [];
+    public static function getArray(xml:Xml, att:String, ?arrayType:XmlCanTypes = STR) {
+        var array:Array<Dynamic> = [];
+        if (xml.exists(att))
+        {
+            array = xml.get(att).split(',');
+            for (i in array)
+            {
+                switch (arrayType)
+                {
+                    case STR: 
+                    case BOOL: i = Simplify.parseBool(i);
+                    case FLOAT: i = Std.parseFloat(i);
+                    case INT: i = Std.parseFloat(i);
+                    case DYNAMIC:
+                }
+            }    
+        }    
+        return array;
     }
 }
 
@@ -57,6 +78,14 @@ class Simplify {
                 return true;
             }    
         }    
+        return false;
+    }
+
+    public static function parseBool(s:String) {
+        if (s == "true" || s == "1")
+            return true;
+        else if (s == "false" || s == "0")
+            return false;
         return false;
     }
 }
