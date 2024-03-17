@@ -1,11 +1,11 @@
 {
-    "name": "XmlHelper",
-    "url" : "https://github.com/GuineaPigUuhh/BetterXML",
-    "license": "MIT",
-    "tags": [],
-    "description": "adds functions that help you use XML.",
-    "version": "1.0.0",
-    "releasenote": "Initial release, everything is working correctly.",
-    "contributors": ["GuineaPigUuhh"],
-    "dependencies": {}
-  }
+  "name": "XmlHelper",
+  "url": "https://github.com/GuineaPigUuhh/XmlHelper",
+  "license": "MIT",
+  "tags": [],
+  "description": "adds functions that help you use XML.",
+  "version": "1.0.0",
+  "releasenote": "Initial release, everything is working correctly.",
+  "contributors": ["GuineaPigUuhh"],
+  "dependencies": {}
+}
